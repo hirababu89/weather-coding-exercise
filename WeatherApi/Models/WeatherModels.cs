@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace WeatherApi.Models;
 
 public record WeatherEntry(
@@ -14,12 +16,12 @@ public record WeatherResponse(IReadOnlyList<WeatherEntry> Results);
 
 // Open-Meteo API response shape
 public record OpenMeteoResponse(
-    OpenMeteoDailyData? Daily
+    [property: JsonPropertyName("daily")] OpenMeteoDailyData? Daily
 );
 
 public record OpenMeteoDailyData(
-    IList<string>? Time,
-    IList<double?>? Temperature2mMax,
-    IList<double?>? Temperature2mMin,
-    IList<double?>? PrecipitationSum
+    [property: JsonPropertyName("time")] IList<string>? Time,
+    [property: JsonPropertyName("temperature_2m_max")] IList<double?>? Temperature2mMax,
+    [property: JsonPropertyName("temperature_2m_min")] IList<double?>? Temperature2mMin,
+    [property: JsonPropertyName("precipitation_sum")] IList<double?>? PrecipitationSum
 );
